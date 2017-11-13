@@ -71,7 +71,7 @@ Cesium.loadText('./assets/data/tableData2.csv').then(function(text) {
 }).otherwise(function(err){
 	console.log(err);
 });
-
+/*
 var positionProperty = new Cesium.SampledProperty();
 positionProperty.addSamples(position);
 var entityPath = viewer.entities.add({
@@ -90,7 +90,7 @@ var entityPath = viewer.entities.add({
 		},
 	}
 });
-
+*/
 var modelEntity = createModel('./assets/data/Cessna172.glb', position[0], orientation[0], modelPath);
 var k = 0;
 window.setInterval(function update() {
