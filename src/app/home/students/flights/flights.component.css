@@ -1,0 +1,35 @@
+a:hover {
+    text-decoration: none;
+}
+
+a.badge {
+    background-color: #808080;
+}
+
+a.badge:hover {
+    color: #55E073;
+}
+
+li.list-group-item {
+    color: #333;
+}
+
+.panel.panel-default {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.panel-body {
+    background-color: #E9E9E9;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.panel-head {
+    background-color: #40C85C;
+}
+
+#tab {
+    display: inline-block;
+    width: 12px;
+}

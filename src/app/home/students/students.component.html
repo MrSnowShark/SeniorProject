@@ -1,0 +1,40 @@
+<div class="row">   
+    <div class="panel panel-default">
+        <ul class="nav nav-pills" [hidden]="hideTabs()">
+            <li role="presentation" [ngClass]="{'active': activeTab === 'Students', 'inactive': activeTab !== 'Students'}">
+                <a role="button" (click)="onTabSelect('Students')">Students</a>
+            </li>
+            <li role="presentation" 
+                [ngClass]="{'active': activeTab === 'Instructors', 'inactive': activeTab !== 'Instructors'}">
+                <a role="button" (click)="onTabSelect('Instructors')">Instructors</a>
+            </li>
+        </ul>          
+        <div class="panel-heading" [class.tabsActive]="!hideTabs()">
+            <div class="row">
+               <div class="col-lg-4 col-sm-4">
+                    <h1>{{ activeTab }}</h1>
+                </div>
+                <div class="col-lg-3 col-sm 3 pull-right">
+                    <form class="search-form">
+                        <div class="form-group" [formGroup]="searchForm" (keyup)="filter()">
+                            <label for="search">Search</label>
+                            <input type="text" id="search" formControlName="searchBox">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <a role="button" (click)="onSelect(i)" *ngFor="let pilot of pilots; let i = index">
+                    <li class="list-group-item" hover>
+                        {{ pilot.firstname }} {{ pilot.lastname }}
+                        <a class="badge">
+                            <span class="glyphicon glyphicon-menu-right"></span>
+                        </a>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
