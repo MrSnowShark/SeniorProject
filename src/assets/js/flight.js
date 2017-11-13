@@ -10,13 +10,12 @@ viewer.terrainProvider = new Cesium.CesiumTerrainProvider({
     });
 viewer.baseLayerPicker = false
 
-function createModel(url, p, o, ePath) {
+function createModel(url, p, o) {
     //viewer.entities.removeAll();
     var entity = viewer.entities.add({
         name : url,
         position : p,
         orientation : o,
-        path : ePath,
         model : {
             uri : url,
             asynchronous : true,
@@ -91,7 +90,7 @@ var entityPath = viewer.entities.add({
 	}
 });
 */
-var modelEntity = createModel('./assets/data/Cessna172.glb', position[0], orientation[0], modelPath);
+var modelEntity = createModel('./assets/data/Cessna172.glb', position[0], orientation[0]);
 var k = 0;
 window.setInterval(function update() {
 	//modelPath.position = position[k];
