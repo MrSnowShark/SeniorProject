@@ -24,11 +24,15 @@ function createModel(url, p, o) {
     return entity;
 }
 
-function createPath(p) {
+function createPath(p, c) {
 	var ePath = viewer.entities.add({
 	  position : p,
 	  path : {
-		  	material: Cesium.Color.WHITE,
+		  	material : new Cesium.PolylineOutlineMaterialProperty({
+	            color : c,
+	            outlineWidth : 2,
+	            outlineColor : Cesium.Color.WHITE.withAlpha(.5)
+	        }),
 			width : 3,
 			leadTime : 300,
 			trailTime : 5
@@ -36,6 +40,23 @@ function createPath(p) {
 	})
 	return ePath;
 }
+
+//function createExceedancePath(p, c) {
+//	var ePath = viewer.entities.add({
+//	  position : p,
+//	  path : {
+//		  	material : new Cesium.PolylineOutlineMaterialProperty({
+//	            color : c,
+//	            //outlineWidth : 2,
+//	            //outlineColor : Cesium.Color.RED.withAlpha(.5)
+//	        }),
+//			width : 3,
+//			leadTime : 300,
+//			trailTime : 5
+//		}
+//	})
+//	return ePath;
+//}
 
 var time = [];
 var altitude = [];
@@ -53,6 +74,12 @@ var hpr = [];
 var orientation = [];
 var timeSet = [];
 var data = [];
+var exceedance = [];
+var exceedanceProperty = new Cesium.SampledProperty(Cesium.Color);
+exceedanceProperty.setInterpolationOptions({
+    interpolationDegree : 3,
+    interpolationAlgorithm : Cesium.LagrangePolynomialApproximation
+});
 var start = viewer.clock.startTime;
 var positionProperty = new Cesium.SampledPositionProperty();
 positionProperty.setInterpolationOptions({
@@ -84,15 +111,23 @@ Cesium.loadText('./assets/data/tableData2.csv').then(function(text) {
 		hpr[j] = new Cesium.HeadingPitchRoll.fromDegrees(heading[j] + 90, pitch[j], roll[j]);
 		orientation[j] = new Cesium.Transforms.headingPitchRollQuaternion(position[j], hpr[j]);
 		timeSet[j] = Cesium.JulianDate.addSeconds(start, j, new Cesium.JulianDate());
+		if(altitude[j] > 900){ 
+			exceedance[j] = Cesium.Color.RED;
+		}else{
+			exceedance[j] = Cesium.Color.WHITE;
+		}
 		positionProperty.addSample(timeSet[j], position[j]);
 		orientationProperty.addSample(timeSet[j], orientation[j]);
+		exceedanceProperty.addSample(timeSet[j], exceedance[j]);
+		//polyline collection
 		j++;
 	}
 }).otherwise(function(err){
 	console.log(err);
 });
-var entityPath = createPath(positionProperty);
+var entityPath = createPath(positionProperty, exceedanceProperty);
 var modelEntity = createModel('./assets/data/Cessna172.glb', positionProperty, orientationProperty);
+//var exceedancePath = createPath(positionProperty, exceedanceProperty);
 /*
 document.addEventListener('keydown', function(e) {
     switch (e.keyCode) {
