@@ -1,0 +1,1 @@
+sed 's/[:blank:]+/,/g' 13588 > test.csv
