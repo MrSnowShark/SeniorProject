@@ -28,11 +28,7 @@ function createPath(p) {
 	var ePath = viewer.entities.add({
 	  position : p,
 	  path : {
-			material : {
-				polylineOutline: {
-					color: { rgba : [255, 0, 255, 255] }
-				}
-			},
+		  	material: Cesium.Color.WHITE,
 			width : 3,
 			leadTime : 300,
 			trailTime : 5
