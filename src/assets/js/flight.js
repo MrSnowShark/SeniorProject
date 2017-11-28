@@ -27,11 +27,11 @@ function createPath(p) {
 	var ePath = viewer.entities.add({
 	  position : p,
 	  path : {
-			material : {
-				polylineOutline: {
-					color: { rgba : [255, 0, 255, 255] }
-				}
-			},
+		  	material : new Cesium.PolylineOutlineMaterialProperty({
+	            color : Cesium.Color.WHITE,
+	            outlineWidth : 2,
+	            outlineColor : Cesium.Color.WHITE.withAlpha(.5)
+	        }),
 			width : 3,
 			leadTime : 300,
 			trailTime : 5
@@ -39,6 +39,25 @@ function createPath(p) {
 	})
 	return ePath;
 }
+
+function createExceedancePath(p) {
+	var ePath = viewer.entities.add({
+	  position : p,
+	  path : {
+		  	material : new Cesium.PolylineOutlineMaterialProperty({
+	            color : Cesium.Color.RED,
+	            outlineWidth : 2,
+	            outlineColor : Cesium.Color.RED.withAlpha(.5)
+	        }),
+			width : 10,
+			leadTime : 300,
+			trailTime : 5
+		}
+	})
+	return ePath;
+}
+
+var time = [];
 var altitude = [];
 var heading = [];
 var pitch = [];
@@ -50,6 +69,11 @@ var hpr = [];
 var orientation = [];
 var timeSet = [];
 var data = [];
+var exceedance = [];
+var exceedancePositionProperty = [];
+var exceedancePath = [];
+var exceedanceEnd = false;
+var exceedanceCount = 0;
 var start = viewer.clock.startTime;
 var positionProperty = new Cesium.SampledPositionProperty();
 positionProperty.setInterpolationOptions({
@@ -74,17 +98,41 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 		latitude[j] = parseFloat(data[i+19]);
 		longitude[j] = parseFloat(data[i+20]);
 		position[j] = new Cesium.Cartesian3.fromDegrees(longitude[j], latitude[j], altitude[j] - 611);
+	for(var i = 0; i < data.length - 1; i+=11) {
+		altitude[j] = parseFloat(data[i+2]);
+		heading[j] = parseFloat(data[i+6]);
+		pitch[j] = -parseFloat(data[i+8]);
+		roll[j] = parseFloat(data[i+9]);
+		latitude[j] = parseFloat(data[i+10]);
+		longitude[j] = parseFloat(data[i+11]);
+		position[j] = new Cesium.Cartesian3.fromDegrees(longitude[j], latitude[j], altitude[j]-610); // Subtract 610 from altitude because of sea level height and model heights *NOT FINAL*
 		hpr[j] = new Cesium.HeadingPitchRoll.fromDegrees(heading[j] + 90, pitch[j], roll[j]);
 		orientation[j] = new Cesium.Transforms.headingPitchRollQuaternion(position[j], hpr[j]);
 		timeSet[j] = Cesium.JulianDate.addSeconds(start, j, new Cesium.JulianDate());
 		positionProperty.addSample(timeSet[j], position[j]);
 		orientationProperty.addSample(timeSet[j], orientation[j]);
+		//polyline collection
+		if(altitude[j] > 850){ 
+			if(exceedanceEnd == false){
+				exceedancePositionProperty[exceedanceCount] = new Cesium.SampledPositionProperty();
+				exceedancePositionProperty[exceedanceCount].setInterpolationOptions({
+				    interpolationDegree : 3,
+				    interpolationAlgorithm : Cesium.LagrangePolynomialApproximation
+				});
+				exceedanceEnd = true;
+			}
+			exceedancePositionProperty[exceedanceCount].addSample(timeSet[j], position[j]);
+		}else if (exceedanceEnd == true){
+			exceedancePath[exceedanceCount] = createExceedancePath(exceedancePositionProperty[exceedanceCount]);
+			exceedanceCount++;
+			exceedanceEnd = false;
+		}
 		j++;
 	}
 }).otherwise(function(err){
 	console.log(err);
 });
-var entityPath = createPath(positionProperty);
+
 var modelEntity = createModel('./assets/data/Cessna172.glb', positionProperty, orientationProperty);
 /*
 document.addEventListener('keydown', function(e) {
