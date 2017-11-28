@@ -98,6 +98,7 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 		latitude[j] = parseFloat(data[i+19]);
 		longitude[j] = parseFloat(data[i+20]);
 		position[j] = new Cesium.Cartesian3.fromDegrees(longitude[j], latitude[j], altitude[j] - 611);
+<<<<<<< HEAD
 	for(var i = 0; i < data.length - 1; i+=11) {
 		altitude[j] = parseFloat(data[i+2]);
 		heading[j] = parseFloat(data[i+6]);
@@ -106,6 +107,8 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 		latitude[j] = parseFloat(data[i+10]);
 		longitude[j] = parseFloat(data[i+11]);
 		position[j] = new Cesium.Cartesian3.fromDegrees(longitude[j], latitude[j], altitude[j]-610); // Subtract 610 from altitude because of sea level height and model heights *NOT FINAL*
+=======
+>>>>>>> e133b302e1e9bb0363c90eb88ce1e29234b0c089
 		hpr[j] = new Cesium.HeadingPitchRoll.fromDegrees(heading[j] + 90, pitch[j], roll[j]);
 		orientation[j] = new Cesium.Transforms.headingPitchRollQuaternion(position[j], hpr[j]);
 		timeSet[j] = Cesium.JulianDate.addSeconds(start, j, new Cesium.JulianDate());

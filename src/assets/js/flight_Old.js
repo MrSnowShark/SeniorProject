@@ -78,7 +78,6 @@ Cesium.loadText('./assets/data/tableData1.csv').then(function(text) { //TABLE DA
 
 //*********************************************************************************************
 //Create a model matrix
-/*
  function loadOrientation() {
  	var quat = new Cesium.SampledProperty(Cesium.Quaternion);
  	Cesium.loadText('./assets/data/HPR1.csv').then(function(text) { //HPR DATA LOADING
@@ -100,22 +99,22 @@ Cesium.loadText('./assets/data/tableData1.csv').then(function(text) { //TABLE DA
  		console.log('ERROR IN HPR DATA: ' + error);
  	});
  }
-*/
+
 //*********************************************************************************************
 //Update table html with Altitude, IAS, VSI and oil temp
-//var orientation = loadOrientation();
+var orientation = loadOrientation();
 modelEntity = createModel('./assets/data/Cessna172.glb');
-/*
+
 window.setInterval(function update(orientation) {
 	// //Try to set orientation of model entity
-	//modelEntity.orientation = orientation;
+	modelEntity.orientation = orientation;
 	//console.log(theEntity.orientation);
 	//console.log(theEntity);
 	var currTime = viewer.clock.currentTime;
 	var startTime = viewer.clock.startTime;
 	var diff = parseInt(Cesium.JulianDate.secondsDifference(currTime, startTime));
 }, 100);
-*/
+
 //0: exceedance, 1: takeoff, 2: landings
 var jumpTimes = [Cesium.JulianDate.fromIso8601('2017-01-02T19:25:37Z'), Cesium.JulianDate.fromIso8601('2017-01-02T19:19:27Z'), Cesium.JulianDate.fromIso8601('2017-01-02T20:36:14Z')];
 var ds = viewer.dataSources.get(0);
