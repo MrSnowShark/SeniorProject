@@ -7,7 +7,6 @@ var terrainProvider = viewer.terrainProvider = new Cesium.CesiumTerrainProvider(
 		url : 'https://assets.agi.com/stk-terrain/v1/tilesets/world/tiles',
     });
 
-
 function createModel(url, p, o) {
     var entity = viewer.entities.add({
         name : url,
@@ -60,11 +59,7 @@ function createExceedancePath(p) {
 
 var time = [];
 var altitude = [];
-var ias = [];
-var vas = [];
-var tas = [];
 var heading = [];
-var course = [];
 var pitch = [];
 var roll = [];
 var latitude = [];
@@ -86,22 +81,23 @@ positionProperty.setInterpolationOptions({
     interpolationAlgorithm : Cesium.LagrangePolynomialApproximation
 });
 var orientationProperty = new Cesium.SampledProperty(Cesium.Quaternion);
+/*
 orientationProperty.setInterpolationOptions({
     interpolationDegree : 3,
     interpolationAlgorithm : Cesium.LagrangePolynomialApproximation
 });
-
-Cesium.loadText('./assets/data/tableData2.csv').then(function(text) {
+*/
+Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 	data = text.split(',');
 	var j = 0;
-	for(var i = 0; i < data.length - 1; i+=11) {
-		altitude[j] = parseFloat(data[i+2]);
-		heading[j] = parseFloat(data[i+6]);
-		pitch[j] = -parseFloat(data[i+8]);
-		roll[j] = parseFloat(data[i+9]);
-		latitude[j] = parseFloat(data[i+10]);
-		longitude[j] = parseFloat(data[i+11]);
-		position[j] = new Cesium.Cartesian3.fromDegrees(longitude[j], latitude[j], altitude[j]-610); // Subtract 610 from altitude because of sea level height and model heights *NOT FINAL*
+	for(var i = 410; i < data.length - 1; i+=41) {
+		altitude[j] = parseFloat(data[i+5]);
+		heading[j] = parseFloat(data[i+9]);
+		pitch[j] = -parseFloat(data[i+11]);
+		roll[j] = -parseFloat(data[i+12]);
+		latitude[j] = parseFloat(data[i+19]);
+		longitude[j] = parseFloat(data[i+20]);
+		position[j] = new Cesium.Cartesian3.fromDegrees(longitude[j], latitude[j], altitude[j] - 611);
 		hpr[j] = new Cesium.HeadingPitchRoll.fromDegrees(heading[j] + 90, pitch[j], roll[j]);
 		orientation[j] = new Cesium.Transforms.headingPitchRollQuaternion(position[j], hpr[j]);
 		timeSet[j] = Cesium.JulianDate.addSeconds(start, j, new Cesium.JulianDate());
