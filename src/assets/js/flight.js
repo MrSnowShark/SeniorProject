@@ -95,13 +95,8 @@ Cesium.loadText('./assets/data/tableData2.csv').then(function(text) {
 	data = text.split(',');
 	var j = 0;
 	for(var i = 0; i < data.length - 1; i+=11) {
-		//time[j] = parseFloat(data[i+1]/1000);
 		altitude[j] = parseFloat(data[i+2]);
-		//ias[j] = parseFloat(data[i+3]);
-		//vas[j] = parseFloat(data[i+4]);
-		//tas[j] = parseFloat(data[i+5]);
 		heading[j] = parseFloat(data[i+6]);
-		//course[j] = parseFloat(data[i+7]);
 		pitch[j] = -parseFloat(data[i+8]);
 		roll[j] = parseFloat(data[i+9]);
 		latitude[j] = parseFloat(data[i+10]);
