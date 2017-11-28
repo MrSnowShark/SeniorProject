@@ -59,6 +59,7 @@ function createExceedancePath(p) {
 
 var time = [];
 var altitude = [];
+var ias = [];
 var heading = [];
 var pitch = [];
 var roll = [];
@@ -92,6 +93,7 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 	var j = 0;
 	for(var i = 410; i < data.length - 1; i+=41) {
 		altitude[j] = parseFloat(data[i+5]);
+		ias[j] = parseFloat(data[i+6]);
 		heading[j] = parseFloat(data[i+9]);
 		pitch[j] = -parseFloat(data[i+11]);
 		roll[j] = -parseFloat(data[i+12]);
@@ -104,7 +106,7 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 		positionProperty.addSample(timeSet[j], position[j]);
 		orientationProperty.addSample(timeSet[j], orientation[j]);
 		//polyline collection
-		if(altitude[j] > 850){ 
+		if(ias[j] > 100){ 
 			if(exceedanceEnd == false){
 				exceedancePositionProperty[exceedanceCount] = new Cesium.SampledPositionProperty();
 				exceedancePositionProperty[exceedanceCount].setInterpolationOptions({
@@ -119,6 +121,7 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 			exceedanceCount++;
 			exceedanceEnd = false;
 		}
+		//console.log(ias[j]);
 		j++;
 	}
 }).otherwise(function(err){
