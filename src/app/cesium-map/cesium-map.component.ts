@@ -23,11 +23,19 @@ export class CesiumMapComponent implements OnInit {
 
   }
 
+  plane1(){
+
+  }
+
+  plane2(){
+	  
+  }
+
   ngOnInit() {
     var script = document.createElement('script');
     script.src = './assets/js/flight.js';
     document.body.appendChild(script);
-    
+
     //Hide header component
     this.authService.flightStarted.emit(true);
   }
