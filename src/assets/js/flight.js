@@ -120,6 +120,7 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 			exceedanceCount++;
 			exceedanceEnd = false;
 		}
+		//console.log(ias[j]);
 		j++;
 	}
 }).otherwise(function(err){
