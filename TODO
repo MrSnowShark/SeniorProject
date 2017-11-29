@@ -1,0 +1,14 @@
+Daniel:
+* Figure out how to and implement pullling data from database 
+* Configure time scrub bar to display flight time instead of current time
+* Implement exceedance displays
+
+Chase:
+* Figure out how to and implement pullling data from database 
+* Find/create plane models
+* Pull models into Cesium
+
+Ben:
+* Figure out how to and implement pullling data from database 
+* Work on HTML for plane model options
+* Improve look of paths, how to look if multiple exceedances
