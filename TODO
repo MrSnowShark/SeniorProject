@@ -9,6 +9,6 @@ Chase:
 * Pull models into Cesium
 
 Ben:
-* Figure out how to and implement pulling data from database 
+* Connect the HTML to the live data being displayed using js 
 * Work on HTML for plane model options
 * Improve look of paths, how to look if multiple exceedances
