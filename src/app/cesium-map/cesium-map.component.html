@@ -4,12 +4,34 @@
     <div id="cesiumContainer" class="col-md-12"></div>
     <!--THE CESIUM CONTAINER-->
     <div id="controlPanel">
-		<div id="flightInfo" style="color:white">
-			Place current flight information here<br/>
-			Such as indicated airspeed<br/>
-			Latitude and Longitude<br/>
-			Or heading
+		<!--Live HTML table-->
+		<div id="flightInfo" style="color:Grey">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<span id="altitude" class="pull-right"></span>
+						Altitude:
+				</li>
+			</ul>
+			<ul class="list-group">
+				<li class="list-group-item">
+					<span id="airSpeed" class="pull-right"></span>
+						Indicated Air Speed:
+				</li>
+			</ul>
+			<ul class="list-group">
+				<li class="list-group-item">
+					<span id="latitude" class="pull-right"></span>
+						Latitude:
+				</li>
+			</ul>
+			<ul class="list-group">
+				<li class="list-group-item">
+					<span id="longitude" class="pull-right"></span>
+						Longitude:
+				</li>
+			</ul>
 		</div>
+		<!-- Options menu-->
         <div id="options" class="btn-group" dropdown>
             <button class="btn btn-default btn-lg dropdown-toggle">
                 <span class="class glyphicon glyphicon-menu-down"></span>

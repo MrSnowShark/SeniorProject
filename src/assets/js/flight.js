@@ -125,6 +125,21 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 });
 var entityPath = createPath(positionProperty);
 var modelEntity = createModel('./assets/data/Cessna172.glb', positionProperty, orientationProperty);
+
+//Sets the live HTML table with info about the flight currently
+var alt = document.getElementById("altitude");
+var as = document.getElementById("airSpeed");
+var lat = document.getElementById("latitude");
+var long = document.getElementById("longitude");
+window.setInterval(function update(orientation) {
+	var currTime = viewer.clock.currentTime;
+	var startTime = viewer.clock.startTime;
+	var diff = parseInt(Cesium.JulianDate.secondsDifference(currTime, startTime));
+	alt.innerHTML = altitude[diff];
+	as.innerHTML = ias[diff];
+	lat.innerHTML = latitude[diff];
+	long.innerHTML = longitude[diff];
+}, 100);
 /*
 document.addEventListener('keydown', function(e) {
     switch (e.keyCode) {
