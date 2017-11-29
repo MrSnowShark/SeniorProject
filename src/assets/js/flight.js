@@ -81,12 +81,10 @@ positionProperty.setInterpolationOptions({
     interpolationAlgorithm : Cesium.LagrangePolynomialApproximation
 });
 var orientationProperty = new Cesium.SampledProperty(Cesium.Quaternion);
-/*
 orientationProperty.setInterpolationOptions({
     interpolationDegree : 3,
     interpolationAlgorithm : Cesium.LagrangePolynomialApproximation
 });
-*/
 Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 	data = text.split(',');
 	var j = 0;
@@ -120,7 +118,6 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 			exceedanceCount++;
 			exceedanceEnd = false;
 		}
-		//console.log(ias[j]);
 		j++;
 	}
 }).otherwise(function(err){
