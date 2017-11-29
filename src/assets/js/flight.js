@@ -81,12 +81,10 @@ positionProperty.setInterpolationOptions({
     interpolationAlgorithm : Cesium.LagrangePolynomialApproximation
 });
 var orientationProperty = new Cesium.SampledProperty(Cesium.Quaternion);
-/*
 orientationProperty.setInterpolationOptions({
     interpolationDegree : 3,
     interpolationAlgorithm : Cesium.LagrangePolynomialApproximation
 });
-*/
 Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 	data = text.split(',');
 	var j = 0;
@@ -105,7 +103,7 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 		positionProperty.addSample(timeSet[j], position[j]);
 		orientationProperty.addSample(timeSet[j], orientation[j]);
 		//polyline collection
-		if(ias[j] > 100){ 
+		if(ias[j] > 100){
 			if(exceedanceEnd == false){
 				exceedancePositionProperty[exceedanceCount] = new Cesium.SampledPositionProperty();
 				exceedancePositionProperty[exceedanceCount].setInterpolationOptions({
@@ -120,7 +118,6 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) {
 			exceedanceCount++;
 			exceedanceEnd = false;
 		}
-		//console.log(ias[j]);
 		j++;
 	}
 }).otherwise(function(err){
@@ -132,11 +129,11 @@ var modelEntity = createModel('./assets/data/Cessna172.glb', positionProperty, o
 document.addEventListener('keydown', function(e) {
     switch (e.keyCode) {
         case 85:
-            viewer.zoomTo(modelEntity, new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(-90), 500)); 
-            //viewer.trackedEntity = modelEntity; 
+            viewer.zoomTo(modelEntity, new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(-90), 500));
+            //viewer.trackedEntity = modelEntity;
             break;
         case 73:
-            viewer.zoomTo(modelEntity, new Cesium.HeadingPitchRange(Cesium.Math.toRadians(-90), Cesium.Math.toRadians(-15), 1000)); 	
+            viewer.zoomTo(modelEntity, new Cesium.HeadingPitchRange(Cesium.Math.toRadians(-90), Cesium.Math.toRadians(-15), 1000));
             //viewer.trackedEntity = modelEntity;
             break;
         default:
