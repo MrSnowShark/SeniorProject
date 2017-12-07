@@ -28,7 +28,7 @@ export class CesiumMapComponent implements OnInit {
   }
 
   plane2(){
-	  
+    
   }
 
   ngOnInit() {

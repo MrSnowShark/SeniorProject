@@ -127,6 +127,14 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) { // Loading d
 var entityPath = createPath(positionProperty);
 var modelEntity = createModel('./assets/data/Cessna172.glb', positionProperty, orientationProperty);
 
+document.getElementById('plane1').onclick = function() {
+  modelEntity.model.uri = './assets/data/Cessna172.glb';
+};
+
+document.getElementById('plane2').onclick = function() {
+  modelEntity.model.uri = './assets/data/CesiumMilkTruck.glb';
+};
+
 //Sets the live HTML table with info about the flight currently
 var alt = document.getElementById("altitude");
 var as = document.getElementById("airSpeed");
@@ -136,7 +144,7 @@ window.setInterval(function update(orientation) {
 	var currTime = viewer.clock.currentTime;
 	var startTime = viewer.clock.startTime;
 	var diff = parseInt(Cesium.JulianDate.secondsDifference(currTime, startTime));
-	alt.innerHTML = altitude[diff];
+	alt.innerHTML = parseInt(altitude[diff]-840);
 	as.innerHTML = ias[diff];
 	lat.innerHTML = latitude[diff];
 	long.innerHTML = longitude[diff];
