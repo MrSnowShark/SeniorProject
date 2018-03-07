@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './authentication/login.component';
 import { HomeComponent } from './home/home.component';
 import { FlightsComponent } from './home/students/flights/flights.component';
@@ -23,7 +22,6 @@ import { routing } from './app.routing';
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent,
         LoginComponent,
         HomeComponent,
         FlightsComponent,
