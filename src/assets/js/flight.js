@@ -157,7 +157,6 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) { // Loading d
 			exceedanceCount3++;
 			exceedanceEnd3 = false;
 		}
-		console.log(roll[j]);
 		j++;
 	}
 }).otherwise(function(err){
