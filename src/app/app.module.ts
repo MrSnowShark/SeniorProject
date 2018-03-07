@@ -5,14 +5,12 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './authentication/login.component';
 import { HomeComponent } from './home/home.component';
 import { FlightsComponent } from './home/students/flights/flights.component';
 import { StudentsComponent } from './home/students/students.component';
 import { FlightInfoComponent } from './home/students/flights/flight-info/flight-info.component';
 import { CesiumMapComponent } from './cesium-map/cesium-map.component';
-import { CesiumInfoComponent } from './cesium-map/cesium-info/cesium-info.component';
 import { DropdownDirective } from './directives/dropdown.directive';
 import { HoverDirective } from './directives/hover.directive';
 
@@ -24,14 +22,12 @@ import { routing } from './app.routing';
 @NgModule({
     declarations: [
         AppComponent,
-        HeaderComponent,
         LoginComponent,
         HomeComponent,
         FlightsComponent,
         StudentsComponent,
         FlightInfoComponent,
         CesiumMapComponent,
-        CesiumInfoComponent,
         DropdownDirective,
         HoverDirective
     ],
