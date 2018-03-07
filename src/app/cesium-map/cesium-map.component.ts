@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { CesiumInfoComponent } from './cesium-info/cesium-info.component';
-
 import { AuthService } from '../authentication/auth.service';
 
 @Component({
@@ -28,7 +26,7 @@ export class CesiumMapComponent implements OnInit {
   }
 
   plane2(){
-    
+
   }
 
   ngOnInit() {
