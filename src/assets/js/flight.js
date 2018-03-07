@@ -71,9 +71,17 @@ var timeSet = [];
 var data = [];
 var exceedance = [];
 var exceedancePositionProperty = [];
+var exceedancePositionProperty2 = [];
+var exceedancePositionProperty3 = [];
 var exceedancePath = [];
+var exceedancePath2 = [];
+var exceedancePath3 = [];
 var exceedanceEnd = false;
+var exceedanceEnd2 = false;
+var exceedanceEnd3 = false;
 var exceedanceCount = 0;
+var exceedanceCount2 = 0;
+var exceedanceCount3 = 0;
 var start = viewer.clock.startTime; // Start is defined by the current system time
 var positionProperty = new Cesium.SampledPositionProperty(); // A Property whose value is interpolated for a given time from the provided set of samples and specified interpolation algorithm and degree, which is also a positionProperty
 positionProperty.setInterpolationOptions({
@@ -119,6 +127,37 @@ Cesium.loadText('./assets/data/testData.csv').then(function(text) { // Loading d
 			exceedanceCount++;
 			exceedanceEnd = false;
 		}
+		if(altitude[j] > 3000 + 840){
+			if(exceedanceEnd2 == false){
+				exceedancePositionProperty2[exceedanceCount2] = new Cesium.SampledPositionProperty();
+				exceedancePositionProperty2[exceedanceCount2].setInterpolationOptions({
+				    interpolationDegree : 3,
+				    interpolationAlgorithm : Cesium.LagrangePolynomialApproximation
+				});
+				exceedanceEnd2 = true;
+			}
+			exceedancePositionProperty2[exceedanceCount2].addSample(timeSet[j], position[j]);
+		}else if (exceedanceEnd2 == true){
+			exceedancePath2[exceedanceCount2] = createExceedancePath(exceedancePositionProperty2[exceedanceCount2], Cesium.Color.BLUE);
+			exceedanceCount2++;
+			exceedanceEnd2 = false;
+		}
+		if(roll[j] <= -10 || roll[j] >= 10){
+			if(exceedanceEnd3 == false){
+				exceedancePositionProperty3[exceedanceCount3] = new Cesium.SampledPositionProperty();
+				exceedancePositionProperty3[exceedanceCount3].setInterpolationOptions({
+				    interpolationDegree : 3,
+				    interpolationAlgorithm : Cesium.LagrangePolynomialApproximation
+				});
+				exceedanceEnd3 = true;
+			}
+			exceedancePositionProperty3[exceedanceCount3].addSample(timeSet[j], position[j]);
+		}else if (exceedanceEnd3 == true){
+			exceedancePath3[exceedanceCount3] = createExceedancePath(exceedancePositionProperty3[exceedanceCount3], Cesium.Color.GREEN);
+			exceedanceCount3++;
+			exceedanceEnd3 = false;
+		}
+		console.log(roll[j]);
 		j++;
 	}
 }).otherwise(function(err){
