@@ -1,9 +1,0 @@
-$path = "..\13588"
-
-$outPath = $path -replace "",".csv"
-
-Get-Content -path $path |
-
-ForEach-Object {$_ -replace " ","," } |
-
-Out-File -filepath $outPath
