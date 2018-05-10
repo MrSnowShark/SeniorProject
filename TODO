@@ -1,8 +1,4 @@
 \\\TODO\\\
-currently not functionable due to Cesium update, fix this
-
-Fix Orientation property not working for plane
-
 Add in exceedance definitions instead of place holder exceedances currently in use
 
 improve GUI, and legend, including all exceedances on the legend
